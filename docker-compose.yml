@@ -3,8 +3,19 @@ services:
   postgres:
     image: postgres
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 500M
+        reservations:
+          cpus: '1.0'
+          memory: 200M
     ports:
       - "5432:5432"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
      - DATABSE_HOST=127.0.0.1
      - POSTGRES_USER=root
